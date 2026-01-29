@@ -22,6 +22,7 @@ import * as z from "zod";
 import { useForm } from "@tanstack/react-form"
 import { toast } from "sonner";
 import Link from "next/link";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const formSchema = z.object({
   name: z.string().min(1, "This field is required"),
@@ -42,7 +43,8 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
       onSubmit: formSchema
     },
     onSubmit: async ({value})=>{
-      const toastId = toast.loading("Creating user...")
+      console.log(value)
+      const toastId = toast.loading("Creating user...");
       try{
         const {data, error} = await authClient.signUp.email(value);
         if(error){
@@ -80,8 +82,75 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                   id={field.name}
                   name={field.name}
                   value={field.state.value ?? ""}
+                  placeholder="Your full name"
                   onChange={(e)=>field.handleChange(e.target.value)}
                   />
+                  {isInvalid && (
+                    <FieldError errors={field.state.meta.errors}></FieldError>
+                  )}
+                </Field>
+              )
+            }}
+            />
+            <form.Field
+            name="email"
+            children={(field)=>{
+              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              return (
+                <Field>
+                  <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                  <Input type="email"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value ?? ""}
+                  placeholder="Your email"
+                  onChange={(e)=>field.handleChange(e.target.value)}
+                  />
+                  {isInvalid && (
+                    <FieldError errors={field.state.meta.errors}></FieldError>
+                  )}
+                </Field>
+              )
+            }}
+            />
+            <form.Field
+            name="password"
+            children={(field)=>{
+              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              return (
+                <Field>
+                  <FieldLabel htmlFor={field.name}>Full name</FieldLabel>
+                  <Input type="password"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value ?? ""}
+                  placeholder="Password(Must be 6 characters)"
+                  onChange={(e)=>field.handleChange(e.target.value)}
+                  />
+                  {isInvalid && (
+                    <FieldError errors={field.state.meta.errors}></FieldError>
+                  )}
+                </Field>
+              )
+            }}
+            />
+            <form.Field
+            name="role"
+            children={(field)=>{
+              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              return (
+                <Field>
+                  <FieldLabel htmlFor={field.name}>Role</FieldLabel>
+                  <Select value={field.state.value} onValueChange={(value)=>field.handleChange(value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a role" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      <SelectItem value="STUDENT">Student</SelectItem>
+                      <SelectItem value="TUTOR">Tutor</SelectItem>
+                    </SelectContent>
+                  </Select>
                   {isInvalid && (
                     <FieldError errors={field.state.meta.errors}></FieldError>
                   )}
@@ -93,7 +162,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         </form>
       </CardContent>
       <CardFooter>
-        <Button id="register-form" type="submit" className="w-full">Register</Button>
+        <Button form="register-form" type="submit" className="w-full">Register</Button>
       </CardFooter>
       <FieldGroup>
         <Field>
