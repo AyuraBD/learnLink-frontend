@@ -22,6 +22,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import { userService } from "@/services/user.service";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { NavbarAuth } from "./NavbarAuth";
 
 interface MenuItem {
   title: string;
@@ -30,7 +34,6 @@ interface MenuItem {
   icon?: React.ReactNode;
   items?: MenuItem[];
 }
-
 interface Navbar1Props {
   className?: string;
   logo?: {
@@ -53,7 +56,12 @@ interface Navbar1Props {
   };
 }
 
+export type NavbarProps = Navbar1Props & {
+  user?: any;
+};
+
 const Navbar = ({
+  user,
   logo = {
     url: "/",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
@@ -79,7 +87,8 @@ const Navbar = ({
     signup: { title: "Register", url: "/register" },
   },
   className,
-}: Navbar1Props) => {
+}: NavbarProps) => {
+  console.log("User from navbar:",user)
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto px-4">
@@ -105,14 +114,7 @@ const Navbar = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
-          </div>
+          <NavbarAuth user={user} auth={auth}></NavbarAuth>
         </nav>
 
         {/* Mobile Menu */}
@@ -153,14 +155,8 @@ const Navbar = ({
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
 
-                  <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline">
-                      <Link href={auth.login.url}>{auth.login.title}</Link>
-                    </Button>
-                    <Button asChild>
-                      <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                    </Button>
-                  </div>
+                  <NavbarAuth user={user} auth={auth}></NavbarAuth>
+
                 </div>
               </SheetContent>
             </Sheet>

@@ -119,7 +119,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
               const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field>
-                  <FieldLabel htmlFor={field.name}>Full name</FieldLabel>
+                  <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                   <Input type="password"
                   id={field.name}
                   name={field.name}

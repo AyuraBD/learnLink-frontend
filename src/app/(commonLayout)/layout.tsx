@@ -1,9 +1,12 @@
 import Footer from "@/components/layouts/Footer"
 import {Navbar} from "../../components/layouts/Navbar"
-const CommonLayout = ({children}: {children: React.ReactNode}) => {
+import { userService } from "@/services/user.service"
+const CommonLayout = async ({children}: {children: React.ReactNode}) => {
+  const userData = await userService.getSession();
+  const user = userData?.data.user;
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar user={user}></Navbar>
       {children}
       <Footer></Footer>
     </div>
