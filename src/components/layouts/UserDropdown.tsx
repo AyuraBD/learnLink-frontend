@@ -1,15 +1,14 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { NavbarProps } from "./Navbar";
 import Link from "next/link";
-const UserDropdown = ({user}:NavbarProps) => {
+const UserDropdown = ({user}:any) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="flex items-center gap-2 rounded-full focus:outline-none">
-          <Avatar className="h-8 w-8">
+          <Avatar className="h-10 w-10">
             <AvatarImage src={user.avatar || ""} alt={user.name} />
-            <AvatarFallback>
+            <AvatarFallback className="font-bold border-2 cursor-pointer">
               {user.name?.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -27,13 +26,13 @@ const UserDropdown = ({user}:NavbarProps) => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link href="/dashboard">Dashboard</Link>
+          <Link className="cursor-pointer" href="/dashboard">Dashboard</Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem
-          className="text-red-500 focus:text-red-500"
+          className="text-red-500 focus:text-red-500 cursor-pointer"
           onClick={() => {
             // call logout action
             console.log("logout");

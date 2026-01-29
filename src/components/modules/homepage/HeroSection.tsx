@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Check } from "lucide-react"
+import Link from "next/link"
 
 const HeroSection = () => {
   return (
@@ -8,7 +10,7 @@ const HeroSection = () => {
 
         {/* Badge */}
         <div className="flex justify-center mb-6">
-          <Badge variant="secondary" className="text-sm px-4 py-1">
+          <Badge variant="secondary" className="text-sm px-4 py-1 border-2">
             🚀 Learn smarter, not harder
           </Badge>
         </div>
@@ -23,25 +25,36 @@ const HeroSection = () => {
 
         {/* Subheading */}
         <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-          SkillBridge helps students find verified tutors, book sessions instantly,
+          LearnLink helps students find verified tutors, book sessions instantly,
           and grow skills with confidence.
         </p>
 
         {/* CTA Buttons */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" className="px-8">
-            Find a Tutor
+          <Button asChild size="lg" className="px-8">
+            <Link href="/tutors">Find a Tutor</Link>
           </Button>
-          <Button size="lg" variant="outline" className="px-8">
-            Become a Tutor
+          <Button asChild size="lg" variant="outline" className="px-8">
+            <Link href='/become-tutor'>Become a Tutor</Link>
           </Button>
         </div>
 
         {/* Trust indicators */}
-        <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-gray-500">
-          <span>✔ Verified Tutors</span>
-          <span>✔ Flexible Scheduling</span>
-          <span>✔ Secure Payments</span>
+        <div className="mt-12 flex flex-wrap justify-center gap-4 text-sm">
+          <div className="flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-green-700">
+            <Check className="h-4 w-4 rounded-full bg-green-100 p-0.5 text-green-600" />
+            <span>Verified Tutors</span>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-green-700">
+            <Check className="h-4 w-4 rounded-full bg-green-100 p-0.5 text-green-600" />
+            <span>Flexible Scheduling</span>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-green-700">
+            <Check className="h-4 w-4 rounded-full bg-green-100 p-0.5 text-green-600" />
+            <span>Secure Payments</span>
+          </div>
         </div>
       </div>
     </section>

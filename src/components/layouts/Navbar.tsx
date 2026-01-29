@@ -22,9 +22,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
-import { userService } from "@/services/user.service";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { NavbarAuth } from "./NavbarAuth";
 
 interface MenuItem {
@@ -49,7 +46,7 @@ interface Navbar1Props {
       title: string;
       url: string;
     };
-    signup: {
+    register: {
       title: string;
       url: string;
     };
@@ -74,21 +71,20 @@ const Navbar = ({
       url: "/"
     },
     {
-      title: "About",
-      url: "/about",
+      title: "Tutors",
+      url: "/tutors",
     },
     {
-      title: "Dashboard",
-      url: "/dashboard",
+      title: "Become a tutor",
+      url: "/become-tutor",
     },
   ],
   auth = {
     login: { title: "Login", url: "/login" },
-    signup: { title: "Register", url: "/register" },
+    register: { title: "Register", url: "/register" },
   },
   className,
 }: NavbarProps) => {
-  console.log("User from navbar:",user)
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto px-4">
