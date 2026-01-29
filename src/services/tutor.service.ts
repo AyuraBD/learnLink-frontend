@@ -13,7 +13,17 @@ const getTutors = async()=>{
   }
 }
 
+const getTutorById = async(id:string)=>{
+  try{
+    const res = await fetch(`${API_URL}/api/tutors/${id}`);
+    const data = await res.json();
+    return {data:data, error:null}
+  }catch(err){
+    return {data:null, error:{message: "Data couldn't found"}}
+  }
+}
 
 export const tutorsService = {
-  getTutors
+  getTutors,
+  getTutorById
 }

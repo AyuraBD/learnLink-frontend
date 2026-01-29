@@ -9,6 +9,10 @@ export interface Tutor {
     subject: string
     description: string
   };
+  user:{
+    name: string
+    image?:string
+  }
   _count: {
     reviews: number
   };

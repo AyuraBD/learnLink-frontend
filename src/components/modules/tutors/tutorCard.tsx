@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import Link from "next/link";
 import { Tutor } from "@/types";
+import Image from "next/image";
 
 
 export default function TutorCard({ tutor }: {tutor: Tutor}) {
@@ -16,13 +17,35 @@ export default function TutorCard({ tutor }: {tutor: Tutor}) {
 
   return (
     <Card className="max-w-sm py-0 gap-2 justify-around rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <CardHeader className="pb-0 py-8 text-center">
+      <CardHeader className="pb-0 py-4 text-center">
         <CardDescription className="text-sm font-semibold">{tutor.category.name}</CardDescription>
         <CardTitle className="text-4xl text-gray-500">{tutor.category.subject}</CardTitle>
       </CardHeader>
 
       <CardContent className="py-4">
-        <p className="text-sm text-gray-700 mb-2">{tutor.bio}</p>
+        {/* Tutor Profile */}
+          <div className="flex items-center gap-4 mb-3">
+            <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-100">
+              <Image
+                src={tutor.user.image || "/avatar-placeholder.png"}
+                alt={tutor.user.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">
+                {tutor.user.name}
+              </h3>
+              <p className="text-sm text-gray-500">
+                Professional Tutor
+              </p>
+            </div>
+          </div>
+        <p className="text-sm text-gray-700 mb-2 line-clamp-2">
+          {tutor.bio}
+        </p>
 
         <div className="flex flex-wrap items-center gap-2 mb-2">
           <Badge variant="secondary">Hourly: BDT{tutor.hourlyRate}</Badge>
@@ -37,7 +60,7 @@ export default function TutorCard({ tutor }: {tutor: Tutor}) {
         </div>
 
         <Link
-          href={`/tutor/${tutor.id}`}
+          href={`/tutors/${tutor.id}`}
           className="mt-4 inline-block w-full text-center rounded-lg bg-blue-600 text-white py-2 text-sm font-medium hover:bg-blue-700 transition-colors"
         >
           View Profile

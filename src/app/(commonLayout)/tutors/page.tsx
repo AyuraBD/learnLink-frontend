@@ -23,7 +23,7 @@ const TutorsPage = async() => {
       <div className="lg:grid lg:grid-cols-4 gap-4">
         {/* Sidebar */}
         <aside className="col-span-1 lg:mb-0 sm:mb-4 lg:sticky lg:top-24 self-start">
-          <div className="bg-white p-4 rounded-xl shadow-md">
+          <div className="bg-white p-6 rounded-xl shadow-md">
             <TutorFilters />
           </div>
         </aside>
