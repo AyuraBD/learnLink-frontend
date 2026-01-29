@@ -1,10 +1,15 @@
-import { Button } from "@/components/ui/button";
+import ExploreTutorsSection from "@/components/modules/homepage/ExploreTutorsSection";
+import HeroSection from "@/components/modules/homepage/HeroSection";
+import HowItWorksSection from "@/components/modules/homepage/HowItWorks";
+import WhyUsSection from "@/components/modules/homepage/WhyUs";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <h1>Home page, common Layout</h1>
-      <Button>Click me</Button>
+    <div className="bg-zinc-50 font-sans dark:bg-black">
+      <HeroSection></HeroSection>
+      <HowItWorksSection></HowItWorksSection>
+      <ExploreTutorsSection></ExploreTutorsSection>
+      <WhyUsSection></WhyUsSection>
     </div>
   );
 }
