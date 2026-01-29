@@ -5,74 +5,103 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import * as z from "zod";
+import { useForm } from "@tanstack/react-form"
+import { toast } from "sonner";
+import Link from "next/link";
+
+const formSchema = z.object({
+  name: z.string().min(1, "This field is required"),
+  email: z.email(),
+  password:z.string().min(6, "Password must be 6 characters long"),
+  role:z.string().min(1, "This field is required")
+})
 
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const form = useForm({
+    defaultValues:{
+      name: "",
+      email: "",
+      password: "",
+      role:""
+    },
+    validators:{
+      onSubmit: formSchema
+    },
+    onSubmit: async ({value})=>{
+      const toastId = toast.loading("Creating user...")
+      try{
+        const {data, error} = await authClient.signUp.email(value);
+        if(error){
+          toast.error(error.message,{id:toastId})
+          return
+        }
+        toast.success("User created successfully",{id:toastId})
+      }catch(err){
+        toast.error("Internal server error.", {id:toastId})
+      }
+    }
+  })
   return (
     <Card {...props}>
       <CardHeader>
-        <CardTitle>Create an account</CardTitle>
+        <CardTitle>Register here</CardTitle>
         <CardDescription>
-          Enter your information below to create your account
+          Enter your information below to register
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form id="register-form" onSubmit={(e)=>{
+          e.preventDefault();
+          form.handleSubmit();
+        }}>
           <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="name">Full Name</FieldLabel>
-              <Input id="name" type="text" placeholder="John Doe" required />
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
-              <FieldDescription>
-                We&apos;ll use this to contact you. We will not share your email
-                with anyone else.
-              </FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input id="password" type="password" required />
-              <FieldDescription>
-                Must be at least 8 characters long.
-              </FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="confirm-password">
-                Confirm Password
-              </FieldLabel>
-              <Input id="confirm-password" type="password" required />
-              <FieldDescription>Please confirm your password.</FieldDescription>
-            </Field>
-            <FieldGroup>
-              <Field>
-                <Button type="submit">Create Account</Button>
-                <Button variant="outline" type="button">
-                  Sign up with Google
-                </Button>
-                <FieldDescription className="px-6 text-center">
-                  Already have an account? <a href="#">Sign in</a>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
+            <form.Field
+            name="name"
+            children={(field)=>{
+              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              return (
+                <Field>
+                  <FieldLabel htmlFor={field.name}>Full name</FieldLabel>
+                  <Input type="text"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value ?? ""}
+                  onChange={(e)=>field.handleChange(e.target.value)}
+                  />
+                  {isInvalid && (
+                    <FieldError errors={field.state.meta.errors}></FieldError>
+                  )}
+                </Field>
+              )
+            }}
+            />
           </FieldGroup>
         </form>
       </CardContent>
+      <CardFooter>
+        <Button id="register-form" type="submit" className="w-full">Register</Button>
+      </CardFooter>
+      <FieldGroup>
+        <Field>
+          <FieldDescription className="px-6 text-center">
+            Already have an account? <Link href="/login">Login</Link>
+          </FieldDescription>
+        </Field>
+      </FieldGroup>
     </Card>
   )
 }
