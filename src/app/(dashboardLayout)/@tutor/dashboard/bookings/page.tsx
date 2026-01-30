@@ -25,7 +25,7 @@ const BookingsPage = async() => {
           </TableHeader>
 
           <TableBody>
-            {bookings.map((booking:Booking)=><BookingsTable key={booking.id} booking={booking}></BookingsTable>)}
+            {bookings.map((booking:Booking, index:number)=><BookingsTable key={booking.id} booking={booking}></BookingsTable>)}
           </TableBody>
         </Table>
       </div>

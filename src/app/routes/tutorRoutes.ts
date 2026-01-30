@@ -12,6 +12,10 @@ export const tutorRoutes: Route[] = [
               title:"Create tutor",
               url: "/dashboard/tutor",
             },
+            {
+              title:"Bookings",
+              url: "/dashboard/bookings"
+            }
           ],
         },
       ];
