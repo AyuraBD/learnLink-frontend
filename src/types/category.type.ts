@@ -3,7 +3,8 @@ export interface Category{
   createdAt: string
   name: string
   subject: string
-  description?: string
+  description?: string,
+  categoryId:string
 }
 export interface CategoryInput{
   name: string

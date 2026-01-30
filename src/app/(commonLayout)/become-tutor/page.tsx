@@ -1,9 +1,14 @@
+import HeroSection from '@/components/modules/becomeTutor/HeroSection'
+import HowItWorksSection from '@/components/modules/becomeTutor/HowItsWorsSection'
+import WhyTeachSection from '@/components/modules/becomeTutor/WhyTeachSection'
 import React from 'react'
 
 const BecomeTutorPage = () => {
   return (
     <div>
-      <h1>Become a tutor</h1>
+      <HeroSection></HeroSection>
+      <WhyTeachSection></WhyTeachSection>
+      <HowItWorksSection></HowItWorksSection>
     </div>
   )
 }

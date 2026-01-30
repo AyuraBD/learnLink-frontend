@@ -1,4 +1,6 @@
+import { cookies } from "next/headers";
 import { env } from "../../env";
+import { CreateTutor } from "@/types";
 
 const API_URL = env.API_URL;
 
@@ -23,7 +25,31 @@ const getTutorById = async(id:string)=>{
   }
 }
 
+const createTutor = async(tutorData: CreateTutor)=>{
+  try{
+    const cookieStore = await cookies();
+    console.log(cookieStore.getAll());
+    const res = await fetch(`${API_URL}/api/tutors/create`,{
+      method: "POST",
+      headers:{
+        "Content-type": "application/json",
+        Cookie: cookieStore.toString()
+      },
+      body: JSON.stringify(tutorData)
+    })
+    console.log('Cookies from tutor service:',cookieStore.toString());
+    const data = await res.json();
+    if(data.error){
+      return {data:null, error: {message: data.error || "Tutor couldn't create"}}
+    }
+    return {data:data, error:null}
+  }catch(err){
+    return {data:null, error:{message:"Something went wrong"}}
+  }
+}
+
 export const tutorsService = {
   getTutors,
-  getTutorById
+  getTutorById,
+  createTutor
 }

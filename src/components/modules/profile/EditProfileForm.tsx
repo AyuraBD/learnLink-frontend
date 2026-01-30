@@ -34,6 +34,7 @@ export default function EditProfileForm({ onSuccess }: EditProfileFormProps) {
       }
     })()
   }, []);
+  
 
   const userSchema = z.object({
     name: z.string().optional(),

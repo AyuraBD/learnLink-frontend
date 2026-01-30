@@ -1,15 +1,19 @@
+"use client";
+
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
 const UserDropdown = ({user}:any) => {
+  if (!user) return null;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="flex items-center gap-2 rounded-full focus:outline-none">
           <Avatar className="h-10 w-10">
-            <AvatarImage src={user.avatar || ""} alt={user.name} />
+            <AvatarImage src={user.image || ""} alt={user.name} />
             <AvatarFallback className="font-bold border-2 cursor-pointer">
-              {user.name?.charAt(0).toUpperCase()}
+              {user?.name ? user.name.charAt(0).toUpperCase() : "?"}
             </AvatarFallback>
           </Avatar>
         </button>

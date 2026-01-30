@@ -21,3 +21,11 @@ export interface Tutor {
     comment: string
   }[];
 };
+
+export interface CreateTutor{
+  bio:string
+  hourlyRate:number
+  experience: number
+  availability: string
+  categoryId:string
+}

@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { tutorsService } from '@/services/tutor.service'
 import { CalendarDays, Clock, Star } from 'lucide-react';
 import Image from 'next/image';
@@ -9,14 +10,12 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
   const {id} = await params;
   const {data} = await tutorsService.getTutorById(id as string);
   const tutor = data?.result;
+  console.log(tutor);
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-10">
-      {/* Top Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Tutor Info */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 mb-6">
-            {/* Subject & Category */}
             <div className="mb-6">
               <div className='py-5'>
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
@@ -35,11 +34,10 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
               </p>
             </div>
 
-            {/* Tutor Profile */}
             <div className="flex items-center gap-4 mb-6">
               <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-100">
                 <Image
-                  src={tutor.user.avatar || "/avatar-placeholder.png"}
+                  src={tutor?.user?.image || "/avatar-placeholder.png"}
                   alt={tutor.user.name}
                   fill
                   className="object-cover"
@@ -48,7 +46,7 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  {tutor.user.name}
+                  {tutor?.user?.name}
                 </h3>
                 <p className="text-sm text-gray-500">
                   Professional Tutor
@@ -56,7 +54,6 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
               </div>
             </div>
 
-            {/* Meta Info */}
             <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 mb-4">
               <span>{tutor.experience}+ years experience</span>
               <span>৳ {tutor.hourlyRate} / hour</span>
@@ -69,13 +66,11 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
               </div>
             </div>
 
-            {/* Bio */}
             <p className="text-gray-700 leading-relaxed max-w-3xl">
               {tutor.bio}
             </p>
           </div>
 
-          {/* Reviews */}
           <div className="bg-white rounded-2xl shadow-md p-6">
             <h2 className="text-xl font-semibold mb-6">
               Student Reviews ({tutor.reviews.length})
@@ -105,35 +100,36 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
           </div>
         </div>
 
-        {/* Booking Card */}
         <div className="lg:col-span-1">
           <div className="bg-white rounded-2xl shadow-md p-6 sticky top-24">
             <h3 className="text-lg font-semibold mb-4">
               Book a Session
             </h3>
 
-            {/* Date */}
             <div className="mb-4">
               <label className="text-sm font-medium text-gray-700 mb-1 block">
                 Select Date
               </label>
-              <div className="relative">
-                <CalendarDays className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
-                <Input type="date" className="pl-9" />
-              </div>
-            </div>
 
-            {/* Time */}
-            <div className="mb-6">
-              <label className="text-sm font-medium text-gray-700 mb-1 block">
-                Select Time
-              </label>
-              <div className="relative">
-                <Clock className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
-                <Input type="time" className="pl-9" />
-              </div>
-            </div>
+              <Select>
+                <SelectTrigger className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500">
+                  <SelectValue placeholder="Choose a date" />
+                </SelectTrigger>
 
+                <SelectContent className="bg-white rounded-lg shadow-lg p-2">
+                  <SelectItem className="hover:bg-blue-100 rounded-md" value="2026-02-01">
+                    Feb 1, 2026
+                  </SelectItem>
+                  <SelectItem className="hover:bg-blue-100 rounded-md" value="2026-02-02">
+                    Feb 2, 2026
+                  </SelectItem>
+                  <SelectItem className="hover:bg-blue-100 rounded-md" value="2026-02-03">
+                    Feb 3, 2026
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+
+            </div>
             <Button className="w-full">
               Book Session
             </Button>
@@ -143,6 +139,7 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
             </p>
           </div>
         </div>
+
       </div>
     </div>
   )
