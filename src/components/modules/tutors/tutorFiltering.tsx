@@ -22,7 +22,6 @@ export default function TutorFilters() {
 
   return (
     <div>
-      {/* Search */}
       <div className="flex flex-row items-center gap-4 mb-4">
         <Input
           placeholder="Search tutors by subject"
@@ -81,7 +80,6 @@ export default function TutorFilters() {
       </div>
 
 
-      {/* Hourly Rate Filter */}
       <div className="mb-4">
         <label className="text-sm font-semibold text-gray-700 mb-1 block">
           Hourly Rate (BDT)
@@ -109,7 +107,6 @@ export default function TutorFilters() {
         </div>
       </div>
 
-      {/* Apply / Reset Buttons */}
       <div className="mt-4 flex gap-2">
         <Button
           onClick={() =>

@@ -23,7 +23,6 @@ export default function TutorCard({ tutor }: {tutor: Tutor}) {
       </CardHeader>
 
       <CardContent className="py-4">
-        {/* Tutor Profile */}
           <div className="flex items-center gap-4 mb-3">
             <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-100">
               <Image

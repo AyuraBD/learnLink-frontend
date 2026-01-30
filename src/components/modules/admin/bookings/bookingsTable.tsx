@@ -7,7 +7,6 @@ import React from 'react'
 const BookingsTable = ({booking}:{booking:Booking}) => {
   return (
     <TableRow>
-      {/* Student */}
       <TableCell>
         <div className="flex flex-col">
           <span className="font-semibold">{booking.student.name}</span>
@@ -19,7 +18,6 @@ const BookingsTable = ({booking}:{booking:Booking}) => {
         </div>
       </TableCell>
 
-      {/* Tutor */}
       <TableCell>
         <div className="flex flex-col">
           <span className="font-semibold">
@@ -31,12 +29,10 @@ const BookingsTable = ({booking}:{booking:Booking}) => {
         </div>
       </TableCell>
 
-      {/* Session Date */}
       <TableCell>
         {new Date(booking.sessionDate).toLocaleDateString()}
       </TableCell>
 
-      {/* Status */}
       <TableCell>
         <Badge
           variant={
@@ -51,7 +47,6 @@ const BookingsTable = ({booking}:{booking:Booking}) => {
         </Badge>
       </TableCell>
 
-      {/* Booked On (same as sessionDate if you don't have createdAt) */}
       <TableCell className="text-muted-foreground text-sm">
         {new Date(booking.sessionDate).toLocaleDateString()}
       </TableCell>

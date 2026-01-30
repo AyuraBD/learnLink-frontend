@@ -11,6 +11,12 @@ export interface User {
   phone?: string
 };
 
+export interface EditUser {
+  name?: string
+  image?: string
+  phone?: string
+};
+
 export interface UserStatus{
   status:string
 }

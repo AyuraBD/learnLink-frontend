@@ -1,11 +1,9 @@
-import ProfileCard from "@/components/modules/profile/ProfileCard"
+import ProfilePage from "@/app/(dashboardLayout)/@tutor/dashboard/profile/page"
 
-const ProfilePage = () => {
+const AdminProfilePage = () => {
   return (
-    <div>
-      <ProfileCard></ProfileCard>
-    </div>
+    <ProfilePage></ProfilePage>
   )
 }
 
-export default ProfilePage
+export default AdminProfilePage
