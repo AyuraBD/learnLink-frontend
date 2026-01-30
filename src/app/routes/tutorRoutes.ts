@@ -10,7 +10,7 @@ export const tutorRoutes: Route[] = [
             },
             {
               title:"Create tutor",
-              url: "/tutor",
+              url: "/dashboard/tutor",
             },
           ],
         },

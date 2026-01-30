@@ -22,7 +22,7 @@ import * as z from "zod";
 import { useForm } from "@tanstack/react-form"
 import { toast } from "sonner";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.email(),
@@ -30,6 +30,7 @@ const formSchema = z.object({
 })
 
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router = useRouter();
   const form = useForm({
     defaultValues:{
       email: "",
@@ -47,7 +48,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
           return
         }
         toast.success("Logged in successfully",{id:toastId})
-        
+        router.push("/");
       }catch(err){
         toast.error("Internal server error.", {id:toastId})
       }
@@ -56,7 +57,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   return (
     <Card {...props}>
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle className="text-2xl">Login to your account</CardTitle>
         <CardDescription>
           Enter your email below to login to your account
         </CardDescription>

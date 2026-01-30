@@ -60,7 +60,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
   return (
     <Card {...props}>
       <CardHeader>
-        <CardTitle>Register here</CardTitle>
+        <CardTitle className="text-2xl">Register</CardTitle>
         <CardDescription>
           Enter your information below to register
         </CardDescription>
