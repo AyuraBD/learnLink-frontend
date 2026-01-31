@@ -14,32 +14,21 @@ import { toast } from 'sonner';
 import * as z from "zod";
 
 const BecomeTutorForm = () => {
-  const [categories, setCategories] = useState<Category>({
-    id: "",
-    createdAt: "",
-    name: "",
-    subject: "",
-    description: "",
-    categoryId:""
-  })
+  const [categories, setCategories] = useState<Category[]>([])
 
   useEffect(()=>{
     (async()=>{
       const res = await categoryAction();
-      if(res?.data?.result){
-        const category = res.data.result;
-        setCategories({
-          id: category.id || "",
-          createdAt: category.createdAt || "",
-          name: category.name || "",
-          subject: category.subject || "",
-          description: category.description || "",
-          categoryId: category.categoryId || ""
-        })
+      if (res) {
+        const list = res as Category[];
+        setCategories(list);
+
+        if (list.length > 0) {
+          form.setFieldValue("categoryId", list[0].id);
+        }
       }
     })()
   },[]);
-  console.log(categories);
 
   const tutorSchema = z.object({
     bio: z
@@ -55,7 +44,7 @@ const BecomeTutorForm = () => {
       .transform((val) => Number(val))
       .refine((val) => !isNaN(val), { message: "Experience must be a number" }),
     availability: z.string().nonempty("Availability is required"),
-    categoryId: z.string().optional()
+    categoryId: z.string().min(1, "Category is required")
   });
 
   const form = useForm({
@@ -64,7 +53,7 @@ const BecomeTutorForm = () => {
       hourlyRate: "",
       experience: "",
       availability:"",
-      categoryId:categories.categoryId
+      categoryId: "",
     },
     validators:{
       onSubmit: tutorSchema
@@ -73,12 +62,11 @@ const BecomeTutorForm = () => {
       const toastId = toast.loading("Creating tutor...");
       const tutorData: CreateTutor = {
         bio: value.bio,
-        hourlyRate: Number(value.hourlyRate), 
-        experience: Number(value.experience), 
+        hourlyRate: Number(value.hourlyRate),
+        experience: Number(value.experience),
         availability: value.availability,
-        categoryId: categories.categoryId
+        categoryId: value.categoryId,
       };
-      console.log("Create tutor from client:", tutorData);
       try{
         const res = await createTutor(tutorData);
         if(res.error){
@@ -94,8 +82,8 @@ const BecomeTutorForm = () => {
   return (
     <Card className='max-w-3xl mx-auto'>
       <CardHeader>
-        <CardTitle>Create Tutor</CardTitle>
-        <CardDescription>You can share your knowledge</CardDescription>
+        <CardTitle className='text-2xl'>Create Tutor</CardTitle>
+        <CardDescription>You can share your knowledge from here</CardDescription>
       </CardHeader>
       <CardContent>
         <form id="tutor-form" onSubmit={(e)=>{
@@ -190,20 +178,27 @@ const BecomeTutorForm = () => {
             <form.Field
               name="categoryId"
               children={(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
+
                 return (
                   <Field>
-                    <FieldLabel htmlFor={field.name}>Categories</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>Category</FieldLabel>
+
                     <select
                       id={field.name}
                       name={field.name}
                       value={field.state.value ?? ""}
                       onChange={(e) => field.handleChange(e.target.value)}
-                      className="border rounded px-2 py-1 w-full"
+                      className="border rounded px-2 py-2 w-full"
                     >
                       <option value="">Select Category</option>
-                      <option value="AVAILABLE">Available</option>
-                      <option value="NOT_AVAILABLE">Not Available</option>
+
+                      {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.subject} — {category.name}
+                        </option>
+                      ))}
                     </select>
 
                     {isInvalid && <FieldError errors={field.state.meta.errors} />}
@@ -211,7 +206,6 @@ const BecomeTutorForm = () => {
                 );
               }}
             />
-
           </FieldGroup>
         </form>
       </CardContent>

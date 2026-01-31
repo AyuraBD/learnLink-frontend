@@ -28,7 +28,6 @@ const getTutorById = async(id:string)=>{
 const createTutor = async(tutorData: CreateTutor)=>{
   try{
     const cookieStore = await cookies();
-    console.log(cookieStore.getAll());
     const res = await fetch(`${API_URL}/api/tutors/create`,{
       method: "POST",
       headers:{
@@ -37,7 +36,6 @@ const createTutor = async(tutorData: CreateTutor)=>{
       },
       body: JSON.stringify(tutorData)
     })
-    console.log('Cookies from tutor service:',cookieStore.toString());
     const data = await res.json();
     if(data.error){
       return {data:null, error: {message: data.error || "Tutor couldn't create"}}

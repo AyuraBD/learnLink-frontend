@@ -6,8 +6,8 @@ import { revalidatePath } from "next/cache";
 
 export const categoryAction = async()=>{
   const {data} = await categoryService.getCategories();
-  revalidatePath("/admin/categories");
-  return data.result;
+  const categories = data?.result;
+  return categories;
 }
 
 export const createCategoryAction = async(data:CategoryInput)=>{
