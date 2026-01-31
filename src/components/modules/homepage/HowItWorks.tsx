@@ -27,17 +27,15 @@ const HowItWorksSection = () => {
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
 
-        {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            How SkillBridge Works
+            How LearnLink Works
           </h2>
           <p className="mt-4 text-gray-600 text-lg">
             Start learning in just a few simple steps.
           </p>
         </div>
 
-        {/* Steps */}
         <div className="grid gap-8 md:grid-cols-3">
           {steps.map((step, index) => {
             const Icon = step.icon

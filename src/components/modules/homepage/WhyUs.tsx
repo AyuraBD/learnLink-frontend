@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Users, GraduationCap, CalendarCheck, Star } from "lucide-react"
+import Link from "next/link"
 
 const stats = [
   {
@@ -53,17 +54,15 @@ const WhyUsSection = () => {
     <section className="py-24 bg-white dark:bg-black">
       <div className="container mx-auto px-6">
 
-        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-            Why Choose SkillBridge?
+            Why Choose LearnLink?
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
             A trusted learning platform backed by real results, real tutors, and real students.
           </p>
         </div>
 
-        {/* Stats */}
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4 mb-24">
           {stats.map((stat, index) => {
             const Icon = stat.icon
@@ -85,7 +84,6 @@ const WhyUsSection = () => {
           })}
         </div>
 
-        {/* Value Propositions */}
         <div className="grid gap-12 md:grid-cols-2 mb-20">
           {values.map((item, index) => (
             <div key={index}>
@@ -99,10 +97,9 @@ const WhyUsSection = () => {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="text-center">
-          <Button size="lg" className="px-10">
-            Get Started with SkillBridge
+          <Button asChild size="lg" className="px-10">
+            <Link href="/tutors">Get Started with LearnLink</Link>
           </Button>
         </div>
 

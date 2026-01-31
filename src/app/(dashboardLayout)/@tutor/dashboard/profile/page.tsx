@@ -28,13 +28,9 @@ const ProfilePage = async() => {
           <span className="font-semibold">Email:</span> {profile.email}{" "}
           {profile.emailVerified && <span className="text-green-600">(Verified)</span>}
         </div>
-
-        {profile.phone && (
-          <div>
-            <span className="font-semibold">Phone:</span> {profile.phone}
-          </div>
-        )}
-
+        <div>
+          <span className="font-semibold">Phone:</span> {profile.phone ? profile.phone : "No phone"}
+        </div>
         <div>
           <span className="font-semibold">Status:</span>{" "}
           <span

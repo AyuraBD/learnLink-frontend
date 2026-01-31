@@ -34,7 +34,7 @@ const BecomeTutorForm = () => {
     bio: z
       .string()
       .min(10, "Bio must be at least 10 characters long.")
-      .max(100, "Bio can not be bigger than 100 characters"),
+      .max(500, "Bio can not be bigger than 500 characters"),
     hourlyRate: z
       .string()
       .transform((val) => Number(val))
@@ -70,9 +70,10 @@ const BecomeTutorForm = () => {
       try{
         const res = await createTutor(tutorData);
         if(res.error){
-          toast.error("Tutor creation failed", {id: toastId})
+          toast.error(res.error?.message?.message, {id: toastId});
+          return
         }        
-        toast.success("Tutor created successfully", {id: toastId});
+        toast.success("Tutor profile created successfully", {id: toastId});
       }catch(err){
         toast.error("Internal server error.", {id: toastId})
       }
@@ -210,7 +211,7 @@ const BecomeTutorForm = () => {
         </form>
       </CardContent>
       <CardFooter>
-        <Button form='tutor-form' className='w-full'>Create Tutor</Button>
+        <Button form='tutor-form' className='w-full cursor-pointer'>Create Tutor</Button>
       </CardFooter>
     </Card>
   )

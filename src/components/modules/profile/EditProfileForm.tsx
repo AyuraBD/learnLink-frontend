@@ -20,6 +20,7 @@ export default function EditProfileForm({ onSuccess }: EditProfileFormProps) {
     image: "",
     phone: "",
   });
+  
 
   useEffect(() => {
     (async ()=> {
@@ -27,7 +28,7 @@ export default function EditProfileForm({ onSuccess }: EditProfileFormProps) {
       if (res?.data?.result) {
         const profile = res.data.result;
         setFormData({
-          name: profile.name || "",
+          name: profile.name,
           image: profile.image || "",
           phone: profile.phone || "",
         });
@@ -37,7 +38,7 @@ export default function EditProfileForm({ onSuccess }: EditProfileFormProps) {
   
 
   const userSchema = z.object({
-    name: z.string().optional(),
+    name: z.string().min(1, { message: "Name is required" }).trim(),
     image:z.string().optional(),
     phone:z.string().optional()
   });
@@ -55,7 +56,6 @@ export default function EditProfileForm({ onSuccess }: EditProfileFormProps) {
       }
       try{
         const res = await updateProfileData(userData);
-        console.log('Res', res);
         if(res.error){
           toast.error("Profile updating failed", {id: toastId})
         }        
@@ -113,7 +113,7 @@ export default function EditProfileForm({ onSuccess }: EditProfileFormProps) {
                 return (
                   <>
                     <FieldLabel htmlFor={field.name}>
-                      Your full name
+                      Your image link
                     </FieldLabel>
 
                     <Input
@@ -140,7 +140,7 @@ export default function EditProfileForm({ onSuccess }: EditProfileFormProps) {
                 return (
                   <>
                     <FieldLabel htmlFor={field.name}>
-                      Your full name
+                      Your phone number
                     </FieldLabel>
 
                     <Input

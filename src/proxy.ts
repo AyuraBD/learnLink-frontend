@@ -16,7 +16,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (!isAuthenticated) {
-    return NextResponse.redirect(new URL("/signin", request.url))
+    return NextResponse.redirect(new URL("/login", request.url))
   }
 
   if (isAdmin && pathName.startsWith("/dashboard")) {

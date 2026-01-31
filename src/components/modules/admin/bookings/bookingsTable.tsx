@@ -1,18 +1,16 @@
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { Booking } from '@/types'
-import React from 'react'
 
 const BookingsTable = ({booking}:{booking:Booking}) => {
   return (
     <TableRow>
       <TableCell>
         <div className="flex flex-col">
-          <span className="font-semibold">{booking.student.name}</span>
-          {booking.student.phone && (
+          <span className="font-semibold">{booking?.student?.name}</span>
+          {booking?.student?.phone && (
             <span className="text-xs text-muted-foreground">
-              {booking.student.phone}
+              {booking?.student?.phone}
             </span>
           )}
         </div>
@@ -21,34 +19,34 @@ const BookingsTable = ({booking}:{booking:Booking}) => {
       <TableCell>
         <div className="flex flex-col">
           <span className="font-semibold">
-            {booking.tutor.category.subject}
+            {booking?.tutor?.category?.subject}
           </span>
           <span className="text-xs text-muted-foreground">
-            ৳{booking.tutor.hourlyRate}/hr · {booking.tutor.experience} yrs
+            ৳{booking?.tutor?.hourlyRate}/hr · {booking?.tutor?.experience} yrs
           </span>
         </div>
       </TableCell>
 
       <TableCell>
-        {new Date(booking.sessionDate).toLocaleDateString()}
+        {new Date(booking?.sessionDate).toLocaleDateString()}
       </TableCell>
 
       <TableCell>
         <Badge
           variant={
-            booking.status === "CONFIRMED"
+            booking?.status === "CONFIRMED"
               ? "default"
-              : booking.status === "PENDING"
+              : booking?.status === "PENDING"
               ? "secondary"
               : "destructive"
           }
         >
-          {booking.status}
+          {booking?.status}
         </Badge>
       </TableCell>
 
       <TableCell className="text-muted-foreground text-sm">
-        {new Date(booking.sessionDate).toLocaleDateString()}
+        {new Date(booking?.sessionDate).toLocaleDateString()}
       </TableCell>
     </TableRow>
   )

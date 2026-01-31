@@ -9,13 +9,17 @@ export const tutorRoutes: Route[] = [
               url: "/dashboard/profile",
             },
             {
-              title:"Create tutor",
-              url: "/dashboard/tutor",
+              title:"Tutor Profile",
+              url: "/dashboard/tutor-profile",
             },
             {
               title:"Bookings",
               url: "/dashboard/bookings"
-            }
+            },
+            {
+              title:"reviews",
+              url: "/dashboard/reviews",
+            },
           ],
         },
       ];

@@ -15,6 +15,22 @@ const getTutors = async()=>{
   }
 }
 
+const getOwnTutorDetails = async()=>{
+  try{
+    const cookieStore = await cookies();
+    const res = await fetch(`${API_URL}/api/tutors/me`, {
+      headers:{
+        Cookie: cookieStore.toString()
+      },
+      cache: "no-store"
+    })
+    const data = await res.json();
+    return {data:data, error:null}
+  }catch(err){
+    return {data:null, error:{message:err}}
+  }
+}
+
 const getTutorById = async(id:string)=>{
   try{
     const res = await fetch(`${API_URL}/api/tutors/${id}`);
@@ -37,8 +53,8 @@ const createTutor = async(tutorData: CreateTutor)=>{
       body: JSON.stringify(tutorData)
     })
     const data = await res.json();
-    if(data.error){
-      return {data:null, error: {message: data.error || "Tutor couldn't create"}}
+    if(data.result.error){
+      return {data:null, error: {message: data.result.error || "Tutor couldn't create"}}
     }
     return {data:data, error:null}
   }catch(err){
@@ -46,8 +62,30 @@ const createTutor = async(tutorData: CreateTutor)=>{
   }
 }
 
+const deleteOwnTutorProfile = async()=>{
+  try{
+    const cookieStore = await cookies();
+    const res = await fetch(`${API_URL}/api/tutors/delete`, {
+      method:"DELETE",
+      headers:{
+        Cookie: cookieStore.toString()
+      },
+      cache: "no-store"
+    })
+    const data = await res.json();
+    if(data.error){
+      return {data:null, error:{message:"Tutor profile can not be delete"}}
+    }
+    return {data:data, error:null}
+  }catch(err){
+    return {data:null, error:{message:err}}
+  }
+}
+
 export const tutorsService = {
   getTutors,
+  getOwnTutorDetails,
   getTutorById,
-  createTutor
+  createTutor,
+  deleteOwnTutorProfile
 }

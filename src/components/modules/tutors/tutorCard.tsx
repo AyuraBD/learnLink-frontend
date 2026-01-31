@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import Link from "next/link";
 import { Tutor } from "@/types";
-import Image from "next/image";
 
 
 export default function TutorCard({ tutor }: {tutor: Tutor}) {
@@ -25,10 +24,9 @@ export default function TutorCard({ tutor }: {tutor: Tutor}) {
       <CardContent className="py-4">
           <div className="flex items-center gap-4 mb-3">
             <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-100">
-              <Image
+              <img
                 src={tutor.user.image || "/avatar-placeholder.png"}
                 alt={tutor.user.name}
-                fill
                 className="object-cover"
               />
             </div>
@@ -42,9 +40,6 @@ export default function TutorCard({ tutor }: {tutor: Tutor}) {
               </p>
             </div>
           </div>
-        <p className="text-sm text-gray-700 mb-2 line-clamp-2">
-          {tutor.bio}
-        </p>
 
         <div className="flex flex-wrap items-center gap-2 mb-2">
           <Badge variant="secondary">Hourly: BDT{tutor.hourlyRate}</Badge>

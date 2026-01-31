@@ -29,3 +29,28 @@ export interface CreateTutor{
   availability: string
   categoryId:string
 }
+
+export interface TutorProfile {
+  id: string;
+  bio: string;
+  hourlyRate: number;
+  experience: string;
+  availability: string;
+  category: {
+    name: string;
+    subject: string;
+    description: string;
+  };
+}
+export interface EditTutorProfile {
+  bio: string;
+  hourlyRate: number;
+  experience: number;
+  availability: string;
+  category: {
+    id: string;
+    name: string;
+    subject: string;
+    description: string;
+  };
+}
