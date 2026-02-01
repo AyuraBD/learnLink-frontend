@@ -5,7 +5,6 @@ import { cookies } from "next/headers";
 const API_URL = env.API_URL;
 
 const createCategories = async(data: CategoryInput)=>{
-  console.log(data);
   try{
     const cookieStore = await cookies();
     const url = new URL(`${API_URL}/api/categories/create`);
@@ -53,7 +52,6 @@ const deleteCategory = async(id:string)=>{
   try{
     const cookieStore = await cookies();
     const url = new URL(`${API_URL}/api/categories/delete/${id}`);
-    console.log(url);
     const res = await fetch(url.toString(),{
       method: "DELETE",
       headers:{
@@ -61,7 +59,6 @@ const deleteCategory = async(id:string)=>{
       }
     });
     const resData = await res.json();
-    console.log(resData);
     if(resData.error){
       return {data:null, error:{message: "Couldn't delete category"}}
     }

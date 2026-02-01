@@ -39,8 +39,7 @@ const UserDropdown = ({user}:{user:User}) => {
         <DropdownMenuItem
           className="text-red-500 focus:text-red-500 cursor-pointer"
           onClick={() => {
-            // call logout action
-            console.log("logout");
+            
           }}
         >
           Logout

@@ -13,7 +13,6 @@ const DeleteTutorProfile = () => {
     setLoading(true);
     try {
       const res = await deleteTutorProfile();
-      console.log('Delete profile:', res);
       setLoading(false);
       setShowModal(false);
 

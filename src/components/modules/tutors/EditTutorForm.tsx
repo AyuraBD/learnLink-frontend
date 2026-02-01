@@ -33,7 +33,6 @@ export default function EditTutorForm({ onSuccess }: EditTutorFormProps) {
   useEffect(()=>{
     (async()=>{
       const res = await categoryAction();
-      console.log("category:", res);
       if (res) {
         const list = res as Category[];
         setCategories(list);
@@ -48,7 +47,6 @@ export default function EditTutorForm({ onSuccess }: EditTutorFormProps) {
   useEffect(() => {
     (async ()=> {
       const res = await getOwnTutorProfile();
-      console.log("Tutor:", res?.data?.result);
       if (res?.data?.result) {
         const tutor = res.data.result;
         setTutorProfile({
@@ -88,9 +86,9 @@ export default function EditTutorForm({ onSuccess }: EditTutorFormProps) {
     
   const form = useForm({
     defaultValues:tutorProfile,
-    validators:{
-      onSubmit: tutorSchema
-    },
+    // validators:{
+    //   onSubmit: tutorSchema
+    // },
     onSubmit: async ({value})=>{
       const toastId = toast.loading("Creating post...");
       const tutorData = {

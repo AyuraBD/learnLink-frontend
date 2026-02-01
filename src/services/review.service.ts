@@ -35,7 +35,6 @@ const postReview = async(id:string, body:Postreview)=>{
       credentials: "include",
       cache: "no-store"
     })
-    console.log('Res',res);
     const result = await res.json();
     if(result.error){
       return {data:null, error:{message:"Failed to post review"}}

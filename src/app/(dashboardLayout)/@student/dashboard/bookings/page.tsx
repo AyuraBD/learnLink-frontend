@@ -5,7 +5,6 @@ import { StudentBooking } from '@/types';
 const BookingsPage = async() => {
   const {data} = await bookingsService.getBookings();
   const bookings = data?.result;
-  console.log(bookings?.tutor);
   return (
     <div>
       <div className='mb-4'>

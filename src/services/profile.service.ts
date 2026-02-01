@@ -24,7 +24,6 @@ const getProfile = async()=>{
 const updateMyUserData = async(data:EditUser)=>{
   try{
     const cookieStore = await cookies();
-    console.log(cookieStore.toString());
     const res = await fetch(`${API_URL}/api/users/me`, {
       method:"PATCH",
       credentials: "include",

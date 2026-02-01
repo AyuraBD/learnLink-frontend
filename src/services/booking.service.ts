@@ -35,7 +35,6 @@ const postBooking = async(id:string, body:BookSession)=>{
       cache: "no-store"
     });
     const data = await res.json();
-    console.log(data);
     if(data.error){
       return {data:null, error:{message:"Couldn't book session"}}
     }

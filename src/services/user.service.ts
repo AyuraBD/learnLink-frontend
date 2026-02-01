@@ -19,8 +19,8 @@ const getSession = async()=>{
       return {data:null, error:{message:"Session is missing"}}
     }
     return {data: session, error: null};
-  }catch(err){
-    console.log(err)
+  }catch(err:any){
+    return {data: null, error: err.message};
   }
 }
 

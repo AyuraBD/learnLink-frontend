@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import TutorCard from "@/components/modules/tutors/tutorCard";
 import TutorFilters from "@/components/modules/tutors/tutorFiltering";
 import { tutorsService } from "@/services/tutor.service"
@@ -5,7 +7,7 @@ import { Tutor } from "@/types";
 
 const TutorsPage = async() => {
   const tutorData = await tutorsService.getTutors();
-  const tutors = tutorData.data.result;
+  const tutors = tutorData?.data?.result ?? [];
   return (
     <div className="px-4 sm:px-6 lg:px-12 py-10 max-w-[1440px] mx-auto">
       <div className="text-center mb-5">
@@ -25,11 +27,11 @@ const TutorsPage = async() => {
         </aside>
 
         <main className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {tutors.map((tutor: Tutor) => (
+          {tutors?.map((tutor: Tutor) => (
             <TutorCard key={tutor.id} tutor={tutor} />
           ))}
 
-          {tutors.length === 0 && (
+          {tutors?.length === 0 && (
             <p className="text-center text-gray-500 mt-12 lg:col-span-3">
               No tutors available at the moment. Please check back later.
             </p>

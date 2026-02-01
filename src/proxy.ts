@@ -26,9 +26,7 @@ export async function proxy(request: NextRequest) {
   if (!isAdmin && pathName.startsWith("/admin-dashboard")) {
     return NextResponse.redirect(new URL("/dashboard", request.url))
   }
-
-  console.log(data)
-  console.log(request.url)
+  
   return NextResponse.next()
 }
 

@@ -37,7 +37,6 @@ export default function PostReviewForm({ id, onSuccess }: PostReviewFormProps) {
       }
       try{
         const res = await postReviewAction(id,reviewData);
-        console.log(res.error);
         if(res.error){
           toast.error("Review posting failed", {id: toastId})
           return

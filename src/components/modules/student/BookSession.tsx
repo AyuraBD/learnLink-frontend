@@ -43,7 +43,6 @@ const BookSession = ({id}:{id:string}) => {
         const reviewData = {
           sessionDate: value.sessionDate
         }
-        console.log(reviewData);
         try{
           const res = await createBooking(id,reviewData);
           const err = res.data.result;
