@@ -16,9 +16,9 @@ const HeroSection = () => {
 
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 max-w-4xl mx-auto">
           Connect with Expert Tutors.
-          <span className="text-blue-600 block">
-            Learn Anytime, Anywhere.
-          </span>
+          <span className="block bg-linear-to-r from-gray-300 via-gray-500 to-gray-800 bg-clip-text text-transparent">
+  Learn Anytime, Anywhere.
+</span>
         </h1>
 
         <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">

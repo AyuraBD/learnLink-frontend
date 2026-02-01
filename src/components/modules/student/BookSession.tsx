@@ -49,7 +49,10 @@ const BookSession = ({id}:{id:string}) => {
           if(err.error){
             toast.error(err.error.message, {id: toastId})
             return
-          }        
+          }
+          if(res.error){
+            return {data:null, error:{message:"Couldn't book session"}}
+          }    
           toast.success("Session booked successfully", {id: toastId});
         }catch(err){
           toast.error("Internal server error.", {id: toastId})
@@ -104,8 +107,8 @@ const BookSession = ({id}:{id:string}) => {
             </form.Field>
           </FieldGroup>
         </form>
-
       </div>
+      
       <Button form="session-form" type='submit' className="w-full">
         Book Session
       </Button>

@@ -3,23 +3,28 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-const categories = [
-  "Math",
-  "Science",
-  "English",
-  "Programming",
-  "Art",
-];
+import { Category } from "@/types";
 
 const ratings = [5, 4, 3, 2, 1];
+export interface CategoryObj{
+  id: string
+  createdAt: string
+  name: string
+  subject: string
+  description?: string,
+  categoryId:string
+}
+export type CategoryList = CategoryObj[];
 
-export default function TutorFilters() {
+export const TutorFilters = ({categories}:{categories:CategoryList}) => {
   const [search, setSearch] = useState("");
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [priceRange, setPriceRange] = useState([0, 5000]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
+  const handleSearch = async()=>{
+
+  }
   return (
     <div>
       <div className="flex flex-row items-center gap-4 mb-4">
@@ -31,7 +36,7 @@ export default function TutorFilters() {
         />
         <Button
           onClick={() =>
-            console.log({ search, selectedCategory, selectedRating, priceRange })
+            console.log({ search })
           }
           className="whitespace-nowrap"
         >
@@ -40,26 +45,26 @@ export default function TutorFilters() {
       </div>
 
       <div className="mb-4 flex flex-row sm:flex-col gap-4">
-        {/* Category Filter */}
         <div className="flex-1">
           <label className="text-sm font-semibold text-gray-700 mb-1 block">
-            Category
+            Categories
           </label>
+          
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="w-full p-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Categories</option>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
+
+            {categories?.map((category: Category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
               </option>
             ))}
           </select>
         </div>
 
-        {/* Rating Filter */}
         <div className="flex-1">
           <label className="text-sm font-semibold text-gray-700 mb-1 block">
             Minimum Rating

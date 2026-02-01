@@ -1,12 +1,12 @@
 import BookSession from '@/components/modules/student/BookSession';
 import { tutorsService } from '@/services/tutor.service'
 import { Star } from 'lucide-react';
-import Image from 'next/image';
 
 const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
   const {id} = await params;
   const {data} = await tutorsService.getTutorById(id as string);
   const tutor = data?.result;
+  console.log(tutor)
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-10">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -77,20 +77,44 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
               </p>
             ) : (
               <div className="space-y-6">
-                {tutor.reviews.map((review: any, idx: number) => (
-                  <div key={idx} className="border-b last:border-none pb-4">
-                    <div className="flex gap-1 mb-1">
-                      {Array.from({ length: review.rating }).map((_, index) => (
-                        <Star
-                          key={index}
-                          className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                        />
-                      ))}
-                    </div>
-                    <p className="text-gray-700">{review.comment}</p>
+              {tutor.reviews.map((review: any, idx: number) => (
+                <div
+                  key={idx}
+                  className="border-b last:border-none pb-6"
+                >
+                  <div className="flex gap-1 mb-3">
+                    {Array.from({ length: review.rating }).map((_, index) => (
+                      <Star
+                        key={index}
+                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
                   </div>
-                ))}
-              </div>
+
+                  <div className="flex items-center gap-3 mb-2">
+                    {review.student.image ? (
+                      <img
+                        src={review.student.image}
+                        alt={review.student.name}
+                        className="w-8 h-8 rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-sm font-semibold text-gray-700">
+                        {review.student.name.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+
+                    <p className="text-sm font-medium text-gray-900">
+                      {review.student.name}
+                    </p>
+                  </div>
+
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    {review.comment}
+                  </p>
+                </div>
+              ))}
+            </div>
             )}
           </div>
         </div>

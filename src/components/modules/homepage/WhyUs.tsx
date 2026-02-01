@@ -69,7 +69,7 @@ const WhyUsSection = () => {
             return (
               <Card key={index} className="text-center shadow-sm">
                 <CardContent className="p-8">
-                  <div className="flex justify-center mb-4 text-blue-600">
+                  <div className="flex justify-center mb-4 text-black-600">
                     <Icon className="w-8 h-8" />
                   </div>
                   <p className="text-3xl font-bold text-gray-900 dark:text-white">

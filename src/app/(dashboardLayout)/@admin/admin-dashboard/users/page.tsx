@@ -5,7 +5,7 @@ import { User } from '@/types'
 
 const UsersPage = async() => {
   const {data} = await userService.getUsers();
-  const users = data?.result;
+  const users = data?.result ?? [];
   return (
     <div>
       <div className='mb-4'>
@@ -25,7 +25,7 @@ const UsersPage = async() => {
           </TableHeader>
 
           <TableBody>
-            {users.map((user:User) => <UserTable key={user.id} user={user}></UserTable>)}
+            {users?.map((user:User) => <UserTable key={user.id} user={user}></UserTable>)}
           </TableBody>
         </Table>
       </div>

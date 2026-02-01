@@ -1,16 +1,20 @@
 export const dynamic = "force-dynamic";
 
 import TutorCard from "@/components/modules/tutors/tutorCard";
-import TutorFilters from "@/components/modules/tutors/tutorFiltering";
+import { TutorFilters } from "@/components/modules/tutors/tutorFiltering";
+import { categoryService } from "@/services/category.service";
 import { tutorsService } from "@/services/tutor.service"
 import { Tutor } from "@/types";
 
 const TutorsPage = async() => {
   const tutorData = await tutorsService.getTutors();
+  const categoriesData = await categoryService.getCategories();
   const tutors = tutorData?.data?.result ?? [];
+  const categories = categoriesData.data.result ?? [];
+  console.log(tutors, categories);
   return (
-    <div className="px-4 sm:px-6 lg:px-12 py-10 max-w-[1440px] mx-auto">
-      <div className="text-center mb-5">
+    <div className="px-4 sm:px-6 lg:px-12 py-14 max-w-[1440px] mx-auto">
+      <div className="text-center mb-12">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
           Find Your Perfect Tutor
         </h1>
@@ -22,7 +26,7 @@ const TutorsPage = async() => {
       <div className="lg:grid lg:grid-cols-4 gap-4">
         <aside className="col-span-1 lg:mb-0 sm:mb-4 lg:sticky lg:top-24 self-start">
           <div className="bg-white p-6 rounded-xl shadow-md">
-            <TutorFilters />
+            <TutorFilters categories={categories} />
           </div>
         </aside>
 

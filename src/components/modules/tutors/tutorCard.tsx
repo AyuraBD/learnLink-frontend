@@ -55,7 +55,7 @@ export default function TutorCard({ tutor }: {tutor: Tutor}) {
 
         <Link
           href={`/tutors/${tutor.id}`}
-          className="mt-4 inline-block w-full text-center rounded-lg bg-blue-600 text-white py-2 text-sm font-medium hover:bg-blue-700 transition-colors"
+          className="mt-4 inline-block w-full text-center rounded-lg bg-gray-800 text-white py-2 text-sm font-medium hover:bg-gray-900 transition-colors"
         >
           View Profile
         </Link>

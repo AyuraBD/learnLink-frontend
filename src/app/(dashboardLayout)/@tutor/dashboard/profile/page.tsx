@@ -1,24 +1,18 @@
+export const dynamic = "force-dynamic";
+
 import EditProfileModal from "@/components/modules/profile/EditProfileModal"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { profileService } from "@/services/profile.service"
 
 const ProfilePage = async() => {
   const {data} = await profileService.getProfile();
-  const profile = data?.result;
+  const profile = data?.result ?? [];
   return (
     <Card className="max-w-5xl mx-auto mt-10 shadow-xl p-8">
       <CardHeader className="flex flex-col items-center space-y-3">
-        {profile.image ? (
-          <img
-            src={profile.image}
-            alt={profile.name}
-            className="w-32 h-32 rounded-full object-cover mb-2"
-          />
-        ) : (
-          <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center mb-2">
-            <span className="text-3xl font-bold">{profile.name[0]}</span>
-          </div>
-        )}
+        <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center mb-2">
+          <span className="text-3xl font-bold">{profile.name[0]}</span>
+        </div>
         <CardTitle className="text-2xl">{profile.name}</CardTitle>
         <p className="text-lg text-gray-600">{profile.role}</p>
       </CardHeader>

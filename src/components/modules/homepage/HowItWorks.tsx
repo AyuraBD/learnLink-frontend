@@ -42,7 +42,7 @@ const HowItWorksSection = () => {
             return (
               <Card key={index} className="border-gray-200 shadow-sm">
                 <CardContent className="p-8 text-center">
-                  <div className="flex items-center justify-center w-14 h-14 mx-auto rounded-full bg-blue-100 text-blue-600 mb-6">
+                  <div className="flex items-center justify-center w-14 h-14 mx-auto rounded-full bg-blue-100 text-black-600 mb-6">
                     <Icon className="w-7 h-7" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900">

@@ -11,3 +11,9 @@ export interface CategoryInput{
   subject: string
   description?: string
 }
+
+// name: string;
+// id: string;
+// createdAt: Date;
+// subject: string;
+// description: string | null;
