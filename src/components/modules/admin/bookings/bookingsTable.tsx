@@ -37,8 +37,8 @@ const BookingsTable = ({booking}:{booking:Booking}) => {
             booking?.status === "CONFIRMED"
               ? "default"
               : booking?.status === "PENDING"
-              ? "secondary"
-              : "destructive"
+              ? "destructive"
+              : "secondary"
           }
         >
           {booking?.status}

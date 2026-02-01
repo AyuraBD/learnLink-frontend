@@ -5,7 +5,6 @@ import { Star } from "lucide-react";
 const ReviewsPage = async() => {
   const {data} = await reviewService.getOwnReviews();
   const reviews = data?.result;
-  console.log(reviews)
   return (
     <div className="mt-6 space-y-4">
       <h3 className="text-lg font-semibold text-gray-900">
@@ -18,7 +17,7 @@ const ReviewsPage = async() => {
       </p>
       }
 
-      {reviews.map((review:TutorReview) => (
+      {reviews?.map((review:TutorReview) => (
         <div
           key={review.id}
           className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm"

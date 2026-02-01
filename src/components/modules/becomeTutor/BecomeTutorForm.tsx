@@ -69,8 +69,9 @@ const BecomeTutorForm = () => {
       };
       try{
         const res = await createTutor(tutorData);
+        console.log("Create tutor",res);
         if(res.error){
-          toast.error(res.error?.message?.message, {id: toastId});
+          toast.error(res.error?.message, {id: toastId});
           return
         }        
         toast.success("Tutor profile created successfully", {id: toastId});

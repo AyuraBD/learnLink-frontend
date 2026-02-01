@@ -1,4 +1,3 @@
-// components/navbar/NavbarAuth.tsx
 "use client";
 
 import Link from "next/link";
@@ -16,7 +15,7 @@ type AuthLinks = {
   };
 };
 
-type User = {
+export type User = {
   id: string;
   name: string;
   email: string;

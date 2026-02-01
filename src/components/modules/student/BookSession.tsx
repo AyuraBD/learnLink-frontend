@@ -46,9 +46,9 @@ const BookSession = ({id}:{id:string}) => {
         console.log(reviewData);
         try{
           const res = await createBooking(id,reviewData);
-          console.log(res);
-          if(res.error){
-            toast.error("Session booking failed", {id: toastId})
+          const err = res.data.result;
+          if(err.error){
+            toast.error(err.error.message, {id: toastId})
             return
           }        
           toast.success("Session booked successfully", {id: toastId});

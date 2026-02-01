@@ -12,7 +12,7 @@ export default function WhyTeachSection() {
   return (
     <section className="py-20 bg-gradient-to-r from-blue-50 to-white">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-10">Why Teach With SkillBridge?</h2>
+        <h2 className="text-3xl font-bold mb-10">Why Teach With LearnLink?</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map((benefit) => (
             <Card key={benefit.title} className="p-6 hover:shadow-lg transition cursor-pointer">

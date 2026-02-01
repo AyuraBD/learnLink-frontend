@@ -15,3 +15,9 @@ export const createCategoryAction = async(data:CategoryInput)=>{
   revalidatePath("/admin/categories");
   return res;
 }
+
+export const deleteCategory = async(id:string)=>{
+  const res = await categoryService.deleteCategory(id);
+  revalidatePath("/admin/categories");
+  return res;
+}

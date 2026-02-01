@@ -1,5 +1,5 @@
 import BookingsTable from '@/components/modules/admin/bookings/bookingsTable'
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { bookingsService } from '@/services/booking.service'
 import { Booking } from '@/types';
 
@@ -25,9 +25,20 @@ const BookingsPage = async() => {
           </TableHeader>
 
           <TableBody>
-            {bookings.map((booking:Booking, index:number)=><BookingsTable key={booking.id} booking={booking}></BookingsTable>)}
+            {bookings && bookings?.length > 0 ? (
+              bookings?.map((booking: Booking) => (
+                <BookingsTable key={booking.id} booking={booking} />
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} className="text-center text-gray-500 py-4">
+                  No booking data found
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
+
       </div>
     </div>
   )

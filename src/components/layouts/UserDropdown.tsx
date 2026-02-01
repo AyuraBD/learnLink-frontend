@@ -3,7 +3,8 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
-const UserDropdown = ({user}:any) => {
+import { User } from "./NavbarAuth";
+const UserDropdown = ({user}:{user:User}) => {
   if (!user) return null;
 
   return (

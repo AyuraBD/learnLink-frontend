@@ -49,7 +49,30 @@ const getCategories = async()=>{
   }
 }
 
+const deleteCategory = async(id:string)=>{
+  try{
+    const cookieStore = await cookies();
+    const url = new URL(`${API_URL}/api/categories/delete/${id}`);
+    console.log(url);
+    const res = await fetch(url.toString(),{
+      method: "DELETE",
+      headers:{
+        Cookie: cookieStore.toString()
+      }
+    });
+    const resData = await res.json();
+    console.log(resData);
+    if(resData.error){
+      return {data:null, error:{message: "Couldn't delete category"}}
+    }
+    return {data:resData, error:null}
+  }catch(err){
+    return {data:null, error:{message:err}}
+  }
+}
+
 export const categoryService = {
   getCategories,
-  createCategories
+  createCategories,
+  deleteCategory
 }
