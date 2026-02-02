@@ -3,11 +3,18 @@ import { env } from "../../env";
 import { CreateTutor } from "@/types";
 
 const API_URL = env.API_URL;
-
-const getTutors = async()=>{
+interface GetSearchParams{
+  search?: string
+}
+const getTutors = async(search?:string)=>{
   try{
     const url = new URL(`${API_URL}/api/tutors`);
-    const res = await fetch(url.toString());
+    if(search){
+      url.searchParams.set("search", search);
+    }
+    const res = await fetch(url.toString(),{
+      cache:"no-store"
+    });
     const data = await res.json();
     return {data:data, error:null}
   }catch(err){
@@ -53,10 +60,11 @@ const createTutor = async(tutorData: CreateTutor)=>{
       body: JSON.stringify(tutorData)
     })
     const data = await res.json();
-    if(data.result.error){
-      return {data:null, error: {message: data.result.error || "Tutor couldn't create"}}
+    
+    if(data.error){
+      return {data:null, error: {message: data.error.message || "Tutor couldn't create"}}
     }
-    return {data:data, error:null}
+    return {data:data.data, error:null}
   }catch(err){
     return {data:null, error:{message:"Couldn't create tutor profile"}}
   }
@@ -81,6 +89,8 @@ const deleteOwnTutorProfile = async()=>{
     return {data:null, error:{message:err}}
   }
 }
+
+
 
 export const tutorsService = {
   getTutors,

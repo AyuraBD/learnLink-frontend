@@ -6,7 +6,6 @@ const TutorDetailPage = async({params,}: {params: Promise<{id:string}>}) => {
   const {id} = await params;
   const {data} = await tutorsService.getTutorById(id as string);
   const tutor = data?.result;
-  console.log(tutor)
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-10">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -23,6 +23,7 @@ import { useForm } from "@tanstack/react-form"
 import { toast } from "sonner";
 import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, "This field is required"),
@@ -32,6 +33,7 @@ const formSchema = z.object({
 })
 
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router = useRouter();
   const form = useForm({
     defaultValues:{
       name: "",
@@ -51,6 +53,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
           return
         }
         toast.success("User created successfully",{id:toastId})
+        router.push('/login');
       }catch(err){
         toast.error("Internal server error.", {id:toastId})
       }

@@ -15,7 +15,6 @@ import * as z from "zod";
 
 const BecomeTutorForm = () => {
   const [categories, setCategories] = useState<Category[]>([])
-
   useEffect(()=>{
     (async()=>{
       const res = await categoryAction();
@@ -69,10 +68,11 @@ const BecomeTutorForm = () => {
       };
       try{
         const res = await createTutor(tutorData);
+        console.log(res);
         if(res.error){
           toast.error(res.error?.message, {id: toastId});
           return
-        }        
+        }
         toast.success("Tutor profile created successfully", {id: toastId});
       }catch(err){
         toast.error("Internal server error.", {id: toastId})
@@ -83,7 +83,7 @@ const BecomeTutorForm = () => {
   return (
     <Card className='max-w-3xl mx-auto'>
       <CardHeader>
-        <CardTitle className='text-2xl'>Create Tutor</CardTitle>
+        <CardTitle className='text-2xl'>Create a tutor profile</CardTitle>
         <CardDescription>You can share your knowledge from here</CardDescription>
       </CardHeader>
       <CardContent>
@@ -91,27 +91,38 @@ const BecomeTutorForm = () => {
           e.preventDefault();
           form.handleSubmit();
         }}>
-          <FieldGroup>
-            <form.Field 
-            name="bio" 
-            children={(field)=>{
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
-              return (
-                <Field>
-                  <FieldLabel htmlFor={field.name}>Bio</FieldLabel>
-                  <Textarea
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value ?? ""}
-                  placeholder='Write about yourself'
-                  onChange={(e)=>field.handleChange(e.target.value)}
-                  />
-                  {isInvalid && (
-                    <FieldError errors={field.state.meta.errors}></FieldError>
-                  )}
-                </Field>
-              )
-            }}/>
+          <FieldGroup className='gap-4'>
+            <form.Field
+              name="categoryId"
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
+
+                return (
+                  <Field>
+                    <FieldLabel htmlFor={field.name}>Category</FieldLabel>
+
+                    <select
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value ?? ""}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      className="border rounded px-2 py-2 w-full"
+                    >
+                      <option value="">Select Category</option>
+
+                      {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.subject} — {category.name}
+                        </option>
+                      ))}
+                    </select>
+
+                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                  </Field>
+                );
+              }}
+            />
             <form.Field 
             name="hourlyRate" 
             children={(field)=>{
@@ -176,37 +187,26 @@ const BecomeTutorForm = () => {
                 );
               }}
             />
-            <form.Field
-              name="categoryId"
-              children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
-
-                return (
-                  <Field>
-                    <FieldLabel htmlFor={field.name}>Category</FieldLabel>
-
-                    <select
-                      id={field.name}
-                      name={field.name}
-                      value={field.state.value ?? ""}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      className="border rounded px-2 py-2 w-full"
-                    >
-                      <option value="">Select Category</option>
-
-                      {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                          {category.subject} — {category.name}
-                        </option>
-                      ))}
-                    </select>
-
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                  </Field>
-                );
-              }}
-            />
+            <form.Field 
+            name="bio" 
+            children={(field)=>{
+              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              return (
+                <Field>
+                  <FieldLabel htmlFor={field.name}>Bio</FieldLabel>
+                  <Textarea
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value ?? ""}
+                  placeholder='Write about yourself'
+                  onChange={(e)=>field.handleChange(e.target.value)}
+                  />
+                  {isInvalid && (
+                    <FieldError errors={field.state.meta.errors}></FieldError>
+                  )}
+                </Field>
+              )
+            }}/>
           </FieldGroup>
         </form>
       </CardContent>

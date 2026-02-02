@@ -5,7 +5,7 @@ import BecomeTutorForm from "./BecomeTutorForm";
 
 export default function HeroSection() {
   return (
-    <section className="bg-gradient-to-r from-blue-50 to-white py-32">
+    <section className="bg-gradient-to-r from-blue-50 to-white py-20">
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center gap-10">
         {/* Text */}
         <div className="flex-1 text-center lg:text-left">

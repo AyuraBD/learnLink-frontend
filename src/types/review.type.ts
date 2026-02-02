@@ -6,3 +6,8 @@ export interface Postreview{
     name: string
   }
 }
+
+export interface ReviewPost{
+  rating: number
+  comment?: string
+}

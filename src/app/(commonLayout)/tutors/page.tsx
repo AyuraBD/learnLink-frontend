@@ -6,12 +6,12 @@ import { categoryService } from "@/services/category.service";
 import { tutorsService } from "@/services/tutor.service"
 import { Tutor } from "@/types";
 
-const TutorsPage = async() => {
-  const tutorData = await tutorsService.getTutors();
-  const categoriesData = await categoryService.getCategories();
-  const tutors = tutorData?.data?.result ?? [];
-  const categories = categoriesData.data.result ?? [];
-  console.log(tutors, categories);
+const TutorsPage = async({searchParams}:{searchParams:Promise<{search?:string}>}) => {
+  const {search} = await searchParams;
+  const {data:tutorsData, error} = await tutorsService.getTutors(search ?? "");
+  const {data:categoriesData} = await categoryService.getCategories();
+  const tutors = tutorsData.result ?? [];
+  const categories = categoriesData.result ?? [];
   return (
     <div className="px-4 sm:px-6 lg:px-12 py-14 max-w-[1440px] mx-auto">
       <div className="text-center mb-12">

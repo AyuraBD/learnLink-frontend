@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Category } from "@/types";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const ratings = [5, 4, 3, 2, 1];
 export interface CategoryObj{
@@ -16,14 +17,23 @@ export interface CategoryObj{
 }
 export type CategoryList = CategoryObj[];
 
-export const TutorFilters = ({categories}:{categories:CategoryList}) => {
+export const TutorFilters = ( {categories}:{categories:CategoryList}) => {
+  // const {search:searchValue} = meta;
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [search, setSearch] = useState("");
+  
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [priceRange, setPriceRange] = useState([0, 5000]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-
+  
   const handleSearch = async()=>{
-
+    const params = new URLSearchParams();
+    if(search.trim()){
+      params.set("search", search.trim());
+    }
+    router.push(`?${params.toString()}`);
   }
   return (
     <div>
@@ -32,14 +42,11 @@ export const TutorFilters = ({categories}:{categories:CategoryList}) => {
           placeholder="Search tutors by subject"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e)=>e.key === "Enter" && handleSearch()}
           className="flex-1"
         />
         <Button
-          onClick={() =>
-            console.log({ search })
-          }
-          className="whitespace-nowrap"
-        >
+          onClick={handleSearch} className="whitespace-nowrap">
           Search
         </Button>
       </div>
@@ -75,9 +82,9 @@ export const TutorFilters = ({categories}:{categories:CategoryList}) => {
             className="w-full p-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Any Rating</option>
-            {ratings.map((r) => (
-              <option key={r} value={r}>
-                {r}★ & up
+            {ratings.map((rating) => (
+              <option key={rating} value={rating}>
+                {rating}★
               </option>
             ))}
           </select>

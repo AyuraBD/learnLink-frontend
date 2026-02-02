@@ -45,17 +45,16 @@ const BookSession = ({id}:{id:string}) => {
         }
         try{
           const res = await createBooking(id,reviewData);
-          const err = res.data.result;
-          if(err.error){
-            toast.error(err.error.message, {id: toastId})
+          if(res.error){
+            toast.error(res.error.message, {id: toastId})
             return
           }
           if(res.error){
             return {data:null, error:{message:"Couldn't book session"}}
-          }    
+          }  
           toast.success("Session booked successfully", {id: toastId});
         }catch(err){
-          toast.error("Internal server error.", {id: toastId})
+          toast.error("Something went wrong.", {id: toastId})
         }
       }
     });

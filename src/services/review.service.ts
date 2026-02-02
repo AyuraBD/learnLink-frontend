@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { env } from "../../env";
-import { Postreview } from "@/types";
+import { Postreview, ReviewPost } from "@/types";
 const API_URL = env.API_URL;
 
 const getOwnReviews = async()=>{
@@ -22,7 +22,7 @@ const getOwnReviews = async()=>{
   }
 }
 
-const postReview = async(id:string, body:Postreview)=>{
+const postReview = async(id:string, body:ReviewPost)=>{
   try{
     const cookieStore = await cookies();
     const res = await fetch(`${API_URL}/api/reviews/create/${id}`, {
