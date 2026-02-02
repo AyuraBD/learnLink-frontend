@@ -10,8 +10,8 @@ const ExploreTutorsSection = async() => {
   const {data} = await categoryService.getCategories();
   const {data:tutorsData} = await tutorsService.getTutors();
 
-  const categories = data.result;
-  const tutors = tutorsData.result;
+  const categories = data?.result;
+  const tutors = tutorsData?.result;
   return (
     <section className="py-24 bg-zinc-50 dark:bg-zinc-950">
       <div className="container mx-auto px-6">

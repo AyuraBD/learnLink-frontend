@@ -59,12 +59,12 @@ const createTutor = async(tutorData: CreateTutor)=>{
       },
       body: JSON.stringify(tutorData)
     })
-    const data = await res.json();
-    
-    if(data.error){
-      return {data:null, error: {message: data.error.message || "Tutor couldn't create"}}
+    const {result} = await res.json();
+
+    if(result.error){
+      return {data:null, error: {message: result.error.message || "Tutor couldn't create"}}
     }
-    return {data:data.data, error:null}
+    return {data:result.data, error:null}
   }catch(err){
     return {data:null, error:{message:"Couldn't create tutor profile"}}
   }
