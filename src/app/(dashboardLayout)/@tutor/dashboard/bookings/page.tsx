@@ -25,7 +25,7 @@ const BookingsPage = async() => {
 
           <TableBody>
             {bookings && bookings.length > 0 ? (
-              bookings.map((booking: Booking) => (
+              bookings?.map((booking: Booking) => (
                 <BookingsTable key={booking.id} booking={booking} />
               ))
             ) : (

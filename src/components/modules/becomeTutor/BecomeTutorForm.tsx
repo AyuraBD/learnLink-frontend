@@ -81,7 +81,7 @@ const BecomeTutorForm = () => {
   });
 
   return (
-    <Card className='max-w-3xl mx-auto'>
+    <Card className='w-full max-w-3xl mx-auto px-4 sm:px-6'>
       <CardHeader>
         <CardTitle className='text-2xl'>Create a tutor profile</CardTitle>
         <CardDescription>You can share your knowledge from here</CardDescription>

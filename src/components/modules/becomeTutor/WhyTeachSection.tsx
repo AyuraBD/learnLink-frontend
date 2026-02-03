@@ -10,7 +10,7 @@ const benefits = [
 
 export default function WhyTeachSection() {
   return (
-    <section className="py-20 bg-gradient-to-r from-blue-50 to-white">
+    <section className="py-20 bg-gradient-to-r from-blue-50 to-white px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold mb-10">Why Teach With LearnLink?</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
